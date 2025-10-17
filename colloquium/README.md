@@ -526,12 +526,12 @@ a[2][0][2][0][2]
 <details>
 <summary><b>Что выведет код и почему?</b></summary>
 
-`TypeError: 'tuple' object does not support item assignment`. Кортеж неизменяем, нельзя переназначить его элементы, даже если элемент - изменяемый список.
+`TypeError: 'tuple' object does not support item assignment`, но при этом `t` станет `(1, 2, [3, 4, 5, 6])`. Парадокс: список внутри кортежа изменяется (`.extend()` срабатывает), но затем Python пытается переназначить `t[2]`, что вызывает ошибку.
 </details>
 
 ```python
 t = (1, 2, [3, 4])
-t[2] = [5, 6]
+t[2] += [5, 6]
 print(t)
 ```
 
